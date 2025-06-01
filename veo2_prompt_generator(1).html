@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veo 2 Prompt Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    label {
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    textarea[readonly] {
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>Veo 2 Prompt Generator</h1>
+
+  <form id="promptForm">
+    <label>Subjek:</label>
+    <input type="text" id="subject">
+
+    <label>Aksi:</label>
+    <input type="text" id="action">
+
+    <label>Ekspresi:</label>
+    <input type="text" id="expression">
+
+    <label>Tempat:</label>
+    <input type="text" id="location">
+
+    <label>Waktu:</label>
+    <select id="time">
+      <option value="pagi">Pagi</option>
+      <option value="siang">Siang</option>
+      <option value="sore">Sore</option>
+      <option value="malam">Malam</option>
+      <option value="fajar">Fajar</option>
+      <option value="senja">Senja</option>
+    </select>
+
+    <label>Gerakan Kamera:</label>
+    <select id="cameraMovement">
+      <option value="Pan (gerakan horizontal)">Pan (gerakan horizontal)</option>
+      <option value="Tilt (gerakan vertikal)">Tilt (gerakan vertikal)</option>
+      <option value="Zoom (perbesar/perkecil)">Zoom (perbesar/perkecil)</option>
+      <option value="Dolly (gerak mendekat/menjauh)">Dolly (gerak mendekat/menjauh)</option>
+      <option value="3D Rotation (rotasi 3D)">3D Rotation (rotasi 3D)</option>
+      <option value="Bullet Time (efek waktu melambat)">Bullet Time (efek waktu melambat)</option>
+      <option value="Overhead (dari atas)">Overhead (dari atas)</option>
+      <option value="Crash Zoom (zoom mendadak)">Crash Zoom (zoom mendadak)</option>
+      <option value="Static (kamera diam)">Static (kamera diam)</option>
+      <option value="Handheld (kamera dipegang tangan)">Handheld (kamera dipegang tangan)</option>
+    </select>
+
+    <label>Pencahayaan:</label>
+    <select id="lighting">
+      <option value="terang">Terang</option>
+      <option value="redup">Redup</option>
+      <option value="kontras tinggi">Kontras Tinggi</option>
+      <option value="siluet">Siluet</option>
+    </select>
+
+    <label>Gaya Video:</label>
+    <select id="style">
+      <option value="sinematik">Sinematik</option>
+      <option value="dokumenter">Dokumenter</option>
+      <option value="animasi">Animasi</option>
+      <option value="noir">Noir</option>
+    </select>
+
+    <label>Suasana Video:</label>
+    <select id="mood">
+      <option value="dramatis">Dramatis</option>
+      <option value="romantis">Romantis</option>
+      <option value="tegang">Tegang</option>
+      <option value="santai">Santai</option>
+    </select>
+
+    <label>Suara atau Musik:</label>
+    <input type="text" id="sound">
+
+    <label>Kalimat yang Diucapkan:</label>
+    <input type="text" id="dialogue">
+
+    <label>Detail Tambahan:</label>
+    <textarea id="extraDetails"></textarea>
+
+    <button type="button" onclick="generatePrompt()">Buat Prompt</button>
+  </form>
+
+  <div class="output">
+    <h3>Hasil Prompt (Bahasa Indonesia):</h3>
+    <textarea id="outputID" rows="6"></textarea>
+
+    <h3>Final Prompt (English - Non-editable):</h3>
+    <textarea id="outputEN" readonly rows="6"></textarea>
+  </div>
+
+  <script>
+    function capitalize(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+
+    function generatePrompt() {
+      const subject = document.getElementById('subject').value;
+      const action = document.getElementById('action').value;
+      const expression = document.getElementById('expression').value;
+      const location = document.getElementById('location').value;
+      const time = document.getElementById('time').value;
+      const camera = document.getElementById('cameraMovement').value;
+      const lighting = document.getElementById('lighting').value;
+      const style = document.getElementById('style').value;
+      const mood = document.getElementById('mood').value;
+      const sound = document.getElementById('sound').value;
+      const dialogue = document.getElementById('dialogue').value;
+      const extra = document.getElementById('extraDetails').value;
+
+      const promptID = `${capitalize(subject)} ${action} dengan ekspresi ${expression} di ${location} pada waktu ${time}. Kamera menggunakan ${camera}, pencahayaan ${lighting}. Video bergaya ${style} dengan suasana ${mood}. Suara latar berupa ${sound}. "${dialogue}". Detail tambahan: ${extra}`;
+      const promptEN = `${capitalize(subject)} ${action} with a ${expression} expression at ${location} during the ${time}. The camera uses ${camera}, with ${lighting} lighting. The video is in a ${style} style and has a ${mood} atmosphere. Background sound: ${sound}. "${dialogue}". Additional details: ${extra}`;
+
+      document.getElementById('outputID').value = promptID;
+      document.getElementById('outputEN').value = promptEN;
+    }
+  </script>
+</body>
+</html>
